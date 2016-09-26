@@ -1,23 +1,21 @@
-def Hanoi(t, ts, s, m, e):
-    pre = map(len, t)
-    if len(t[s][ts:]) == 1:
-        t[e].append(t[s].pop())
-        print '####'
-        print t
-        print '####'
+def Hanoi(n, s, m, e):
+    if n==1:
+        return [[s, e]]
     else:
-        Hanoi(t, ts+1, s, e, m) 
-        Hanoi(t, ts, s, m, e)
-        for i in range(pre[s]-2):
-            Hanoi(t, pre[m]+1, m, e, s)
-            Hanoi(t, len(t[m])-1, m, s ,e)
+        t = []
+        t+=Hanoi(n-1, s, e, m)
+        t+=Hanoi(1, s, m, e)
+        for i in range(2,n):
+            t+=Hanoi(n-i, m, e, s)
+            t+=Hanoi(1, m, s, e)
             m, s = s, m
-        print 
-        print t
-        print ' '.join([str(x) for x in [m,s,e]])
-        print 
-        Hanoi(t, len(t[m])-1, m, s, e)
+        t+=Hanoi(1, m, s, e)
+        return t
 
-t = [ range(4,0,-1), [], [] ]
+t = [range(5, 0, -1), [], []]
+for s, e in Hanoi(len(t[0]), 0, 1, 2):
+    print t
+    t[e].append(t[s].pop())
 print t
-Hanoi(t, 0, 0, 1, 2)
+
+
