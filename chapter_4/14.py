@@ -5,11 +5,7 @@ def Hanoi(n, s, m, e):
         t = []
         t+=Hanoi(n-1, s, e, m)
         t+=Hanoi(1, s, m, e)
-        for i in range(2,n):
-            t+=Hanoi(n-i, m, e, s)
-            t+=Hanoi(1, m, s, e)
-            m, s = s, m
-        t+=Hanoi(1, m, s, e)
+        t+=Hanoi(n-1, m, s, e)
         return t
 
 t = [range(5, 0, -1), [], []]
