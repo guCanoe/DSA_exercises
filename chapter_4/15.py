@@ -6,7 +6,7 @@ def subset(s):
         for i in range(len(t)):
             t.append(t[i] + [s[0]]) 
             t.append([s[0]] + t[i]) 
-        return t
+        return t + [[s[0]]]
 
 for x in  subset(range(5)):
     print x
